@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,7 +11,7 @@ namespace Backend.Controllers
     [Route("[controller]")]
     public class CustomersController : ControllerBase
     {
-        private List<Customers> Customers = new List<Customers>();
+        private readonly List<Customers> Customers = new List<Customers>();
 
 
         private readonly ILogger<CustomersController> _logger;
@@ -35,5 +36,58 @@ namespace Backend.Controllers
 
             return Customers;
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Customers> Get(int id)
+        {
+            var customer = Customers.FirstOrDefault((p) => p.Id == id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(customer);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Customers customer)
+        {
+            try
+            {
+                customer.Status = true;
+                customer.RegisterDate = DateTime.UtcNow;
+                Customers.Add(customer);
+            }
+            catch (Exception ex)
+            {
+                BadRequest(ex.Message);
+            }
+
+            return Ok(customer);
+
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Update(int id, Customers customer)
+        {
+            if (id != customer.Id)
+            {
+                return BadRequest();
+            }
+
+            Customers todoCustomer = Customers.FirstOrDefault(x=> x.Id == id);
+
+            if (todoCustomer == null)
+            {
+                return NotFound();
+            }
+
+            todoCustomer.Name = customer.Name;
+            todoCustomer.Status = customer.Status;
+
+            return Ok(todoCustomer);
+        }
+
     }
 }

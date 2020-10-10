@@ -1,10 +1,18 @@
 ﻿<Properties StartupConfiguration="{88E375A3-7D71-4722-9CCF-AF6C9CDCC287}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/CustomersController.cs">
+    <Files>
+      <File FileName="Models/Customers.cs" Line="1" Column="1" />
+      <File FileName="Controllers/CustomersController.cs" Line="10" Column="13" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Backend" expanded="True">
-            <Node name="Backend" expanded="True" selected="True">
+            <Node name="Backend" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="CustomersController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
